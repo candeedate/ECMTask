@@ -24,9 +24,9 @@ namespace Test.AddressEnrichment.Task_ID1_RecruitmentTask
                             message: "Google Authentication Login page has not been opened (domain is not correct)");
 
             // --- STEP 3 ---
-            pGoogleAuthentication.EnterEmailAddress("firsttesterlast@gmail.com");
+            pGoogleAuthentication.EnterEmailAddress(EMAIL_ADDRESS_CORRECT); // EMAIL TO REPLACE - DELIVERED.IO EMAIL NEEDED
             pGoogleAuthentication.ClickNextButtonAfterEmail();
-            pGoogleAuthentication.EnterPassword("zmalqp10");
+            pGoogleAuthentication.EnterPassword(EMAIL_PASSWORD_CORRECT);
             pGoogleAuthentication.ClickNextButtonAfterPassword();
             sNavbar.ClickHomeLink(); // TO DELETE - DELIVERED.IO EMAIL NEEDED
 
@@ -38,7 +38,7 @@ namespace Test.AddressEnrichment.Task_ID1_RecruitmentTask
                           message: "Textarea for address data is not visible on home page");
 
             // --- STEP 4 ---
-            pHome.EnterAddress("Scaleworks Inc, 118 Broadway Suite 627 San Antonio, TX 78205");
+            pHome.EnterAddress(ADDRESS_DATA_CORRECT);
             pHome.ClickSubmitButton();
 
             Assert.IsTrue(condition: pHome.CheckIfAddressLabelIsVisible(),
@@ -55,9 +55,9 @@ namespace Test.AddressEnrichment.Task_ID1_RecruitmentTask
             pLogin.ClickSignInWithGoogleButton();
 
             // --- STEP 1 ---
-            pGoogleAuthentication.EnterEmailAddress("firsttesterlast@gmail.com");
+            pGoogleAuthentication.EnterEmailAddress(EMAIL_ADDRESS_WRONG_DOMAIN);
             pGoogleAuthentication.ClickNextButtonAfterEmail();
-            pGoogleAuthentication.EnterPassword("zmalqp10");
+            pGoogleAuthentication.EnterPassword(EMAIL_PASSWORD_WRONG_DOMAIN);
             pGoogleAuthentication.ClickNextButtonAfterPassword();
 
             Assert.IsTrue(condition: pLogin.CheckIfNotAllowedErrorLabelIsVisible(),
