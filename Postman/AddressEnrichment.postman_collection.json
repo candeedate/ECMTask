@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "2810e890-2623-40d0-9060-b350869e9e3d",
+		"name": "AddressEnrichment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Request without authorization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74cbfdab-9311-4886-8a48-fc71c49b6f8a",
+						"exec": [
+							"pm.test(\"Status code is 401 - Unauthorized\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://addressenrichment.azurewebsites.net/api/values?inputString=Scaleworks%20Inc%2C%20118%20Broadway%20Suite%20627%20San%20Antonio%2C%20TX%2078205",
+					"protocol": "http",
+					"host": [
+						"addressenrichment",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"values"
+					],
+					"query": [
+						{
+							"key": "inputString",
+							"value": "Scaleworks%20Inc%2C%20118%20Broadway%20Suite%20627%20San%20Antonio%2C%20TX%2078205"
+						}
+					]
+				},
+				"description": "Request without authorization"
+			},
+			"response": []
+		},
+		{
+			"name": "Request with authorization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06f29083-ff85-4553-aa31-f660c185215c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains 'Names' node\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('Names');",
+							"});",
+							"",
+							"pm.test(\"Response contains 'Addresses' node\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('Addresses');",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Fsk4ukDKMtN8zwDg5VlpThhbiwSV3EVW2cH63T1XPPQJXxFXPJir0uyvM0IgjUV5_BjdRJByvc_Vre0Uii3GaFoMb8C7teI2cAa1ghkj5TkAgti-ivPkZ5VNOTWG2Hg4tI6oy8rGqjfGIKGCnFu5u-iR94xavOW_1f466Y33HCqIRep-eAKdlFhF0wCaSJecPPwlRrNiYPiJpowU61ZyVx2E6jNBTiEkyh5z73pYZPHQWN-7_lKorr1zpnB-H473",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://addressenrichment.azurewebsites.net/api/values?inputString=Scaleworks%20Inc%2C%20118%20Broadway%20Suite%20627%20San%20Antonio%2C%20TX%2078205",
+					"protocol": "http",
+					"host": [
+						"addressenrichment",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"values"
+					],
+					"query": [
+						{
+							"key": "inputString",
+							"value": "Scaleworks%20Inc%2C%20118%20Broadway%20Suite%20627%20San%20Antonio%2C%20TX%2078205"
+						}
+					]
+				},
+				"description": "Simple request for authorized user"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
